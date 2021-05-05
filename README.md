@@ -1,2 +1,2 @@
 # fight-against-landlords
-java课作业
+java斗地主小游戏
