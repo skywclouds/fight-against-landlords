@@ -1,29 +1,30 @@
 package game;
 /*
- * ¶·µØÖ÷Ğ¡ÓÎÏ·
- * ×÷Õß£ºÍõºÕ20201863
+ * æ–—åœ°ä¸»å°æ¸¸æˆ
+ * Author: Henry Wang
+ * Date: 2021-4-22
  * */
 import java.util.ArrayList;
 
-/*Íæ¼ÒÀà
+/*ç©å®¶ç±»
  * */
 public class Player {
-	/**µ±Ç°Íæ¼ÒÓµÓĞµÄÅÆ
+	/**å½“å‰ç©å®¶æ‹¥æœ‰çš„ç‰Œ
 	 * */
 	ArrayList<Integer> cards = new ArrayList<Integer>();
-	/**µ±Ç°Íæ¼ÒÓµÓĞµÄÅÆÊÇ·ñ±­Ñ¡ÖĞ
+	/**å½“å‰ç©å®¶æ‹¥æœ‰çš„ç‰Œæ˜¯å¦æ¯é€‰ä¸­
 	 * */
 	ArrayList<Boolean> isSelected = new ArrayList<Boolean>();
-	/**ÅĞ¶Ï»ØºÏÊÇ·ñ½áÊø
+	/**åˆ¤æ–­å›åˆæ˜¯å¦ç»“æŸ
 	 * */
 	static int count = 0;
-	/**µ±Ç°Íæ¼ÒÊÇ·ñÎªµØÖ÷£¬Ä¬ÈÏÖµÎªfalse
+	/**å½“å‰ç©å®¶æ˜¯å¦ä¸ºåœ°ä¸»ï¼Œé»˜è®¤å€¼ä¸ºfalse
 	 * */
 	boolean isLandlord = false;
-	/**½ĞµØÖ÷Ê±³öµÄ·ÖÊı
+	/**å«åœ°ä¸»æ—¶å‡ºçš„åˆ†æ•°
 	 * */
 	int score = 0;
-	/**¸øÍæ¼ÒÊÖÖĞµÄÅÆÅÅĞò
+	/**ç»™ç©å®¶æ‰‹ä¸­çš„ç‰Œæ’åº
 	 * */
 	public void sort() {
 		for(int i = 0;i < this.cards.size();i++) {
@@ -36,7 +37,7 @@ public class Player {
 			}
 		}
 	}
-	/**±È½ÏÁ½ÕÅÅÆµÄ´óĞ¡
+	/**æ¯”è¾ƒä¸¤å¼ ç‰Œçš„å¤§å°
 	 * */
 	static int compare(int a,int b) {
 		if(a >= 52 && b >= 52) 
@@ -61,68 +62,68 @@ public class Player {
 				return -1;
 		}	
 	}
-	/**ÅĞ¶ÏÍæ¼Ò³öµÄÅÆÄÜ·ñÑ¹¹ıµçÄÔ³öµÄÅÆ
+	/**åˆ¤æ–­ç©å®¶å‡ºçš„ç‰Œèƒ½å¦å‹è¿‡ç”µè„‘å‡ºçš„ç‰Œ
 	 * */
 	public static boolean isBigger(ArrayList<Integer> cards1,
 			ArrayList<Integer> cards2) {
 		if(cards2.isEmpty()) {
-			//¶Ô·½²»Òª
+			//å¯¹æ–¹ä¸è¦
 			return true;
 		}else if(cards1.size() == 5) {
-			//Íæ¼Ò³öÈı´ø¶ş»òµ¥Ë³
+			//ç©å®¶å‡ºä¸‰å¸¦äºŒæˆ–å•é¡º
 			if(cards2.size() == 5) {
 				if(cards1.get(4)%13 - cards2.get(0)%13 == 4) {
-					//µ¥Ë³µÄÇé¿ö
+					//å•é¡ºçš„æƒ…å†µ
 					return cards1.get(4)%13 > cards2.get(4)%13?true:false;
 				}else {
-					//Èı´ø¶şµÄÇé¿ö
+					//ä¸‰å¸¦äºŒçš„æƒ…å†µ
 					int num1 = cards1.get(0)%13 == cards1.get(2)%13?
 						cards1.get(0)%13:cards1.get(2)%13;
 					int num2 = cards2.get(0)%13 == cards2.get(2)%13?
 							cards2.get(0)%13:cards2.get(2)%13;
-					//¼ÇÂ¼¸÷×ÔµÄÈıÕÅÅÆµÄÖµ							
+					//è®°å½•å„è‡ªçš„ä¸‰å¼ ç‰Œçš„å€¼							
 					return num1 > num2?true:false;				
 				}
 			}else {
-				//Èç¹ûÍæ¼Ò³ö5ÕÅ£¬¶Ô·½³öµÄ²»ÊÇ5ÕÅ£¬ÔòÑ¹²»¹ı
+				//å¦‚æœç©å®¶å‡º5å¼ ï¼Œå¯¹æ–¹å‡ºçš„ä¸æ˜¯5å¼ ï¼Œåˆ™å‹ä¸è¿‡
 				return false;
 			}	
 		}else if(cards1.size() == 4) {
-			//Íæ¼Ò³öÕ¨»òÈı´øÒ»
+			//ç©å®¶å‡ºç‚¸æˆ–ä¸‰å¸¦ä¸€
 			if(cards1.get(0)%13 == cards1.get(3)%13) {
-				//Íæ¼Ò³öÕ¨
+				//ç©å®¶å‡ºç‚¸
 				if(cards2.size() == 2) {	
 					return cards2.get(0) == 52?false:true;
-					//¶Ô·½³öÍõÕ¨£¬¿Ï¶¨Ñ¹²»¹ı			
+					//å¯¹æ–¹å‡ºç‹ç‚¸ï¼Œè‚¯å®šå‹ä¸è¿‡			
 				}else if(cards2.size() == 4) {
-					//Íæ¼ÒºÍ¶Ô·½¶¼³öËÄÕÅ£¬¶Ô·½¿ÉÄÜÊÇÕ¨Ò²¿ÉÄÜÊÇÈı´øÒ»
+					//ç©å®¶å’Œå¯¹æ–¹éƒ½å‡ºå››å¼ ï¼Œå¯¹æ–¹å¯èƒ½æ˜¯ç‚¸ä¹Ÿå¯èƒ½æ˜¯ä¸‰å¸¦ä¸€
 					if(cards2.get(0)%13 == cards2.get(3)%13) {
-						//¶Ô·½³öÕ¨
+						//å¯¹æ–¹å‡ºç‚¸
 						return cards1.get(0)%13 > cards2.get(0)%13?true:false;
 					}else {
-						//¶Ô·½³öÈı´øÒ»
+						//å¯¹æ–¹å‡ºä¸‰å¸¦ä¸€
 						return true;
 					}					
 				}else {
 					return true;
 				}
 			}else {
-				//Íæ¼Ò³öÈı´øÒ»
+				//ç©å®¶å‡ºä¸‰å¸¦ä¸€
 				if(cards2.size() == 4) {
-					//¶Ô·½Ò²³öÈı´øÒ»
+					//å¯¹æ–¹ä¹Ÿå‡ºä¸‰å¸¦ä¸€
 					int num1 = cards1.get(0) == cards1.get(2)?
 							cards1.get(0)%13:cards1.get(1)%13;
 					int num2 = cards2.get(0) == cards2.get(2)?
 							cards2.get(0)%13:cards2.get(1)%13;
-					//ÕÒ³öÈıµÄÖµ			
+					//æ‰¾å‡ºä¸‰çš„å€¼			
 					return num1 > num2?true:false;						
 				}else {
-					//Íæ¼Ò³öÈı´øÒ»£¬¶Ô·½²»ÊÇÈı´øÒ»
+					//ç©å®¶å‡ºä¸‰å¸¦ä¸€ï¼Œå¯¹æ–¹ä¸æ˜¯ä¸‰å¸¦ä¸€
 					return false;
 				}
 			}
 		}else if(cards1.size() == 3) {
-			//Íæ¼Ò³öÈıÕÅ
+			//ç©å®¶å‡ºä¸‰å¼ 
 			if(cards2.size() == 3) {
 				return cards1.get(0)%13 > cards2.get(0)%13?true:false;		
 			}else {
@@ -130,26 +131,26 @@ public class Player {
 			}
 		}else if(cards1.size() == 2) {
 			if(cards1.get(0) >= 52) {
-				//ÍõÕ¨¿Ï¶¨ÄÜÑ¹
+				//ç‹ç‚¸è‚¯å®šèƒ½å‹
 				return true;
 			}else if(cards2.size() == 2) {
 				if(cards2.get(0) >= 52) {
-					//¶Ô·½ÊÇÍõÕ¨£¬¿Ï¶¨Ñ¹²»¹ı
+					//å¯¹æ–¹æ˜¯ç‹ç‚¸ï¼Œè‚¯å®šå‹ä¸è¿‡
 					return false;
 				}else {
 					return cards1.get(0)%13 > cards2.get(0)%13?true:false;			
 				}
 			}else {
-				//¶Ô·½³öµÄ²»ÊÇÁ½ÕÅ
+				//å¯¹æ–¹å‡ºçš„ä¸æ˜¯ä¸¤å¼ 
 				return false;
 			}
 		}else if(cards1.size() == 1) {
 			if(cards2.size() == 1) {
 				if(cards1.get(0) >= 52) {
-					//³ö´óĞ¡ÍõµÄÇé¿ö
+					//å‡ºå¤§å°ç‹çš„æƒ…å†µ
 					return cards1.get(0) > cards2.get(0)?true:false;
 				}else if(cards2.get(0) >= 52) {
-					//Íæ¼Ò²»ÊÇ´óĞ¡Íõ£¬ÇÒ¶Ô·½ÊÇ´óĞ¡Íõ
+					//ç©å®¶ä¸æ˜¯å¤§å°ç‹ï¼Œä¸”å¯¹æ–¹æ˜¯å¤§å°ç‹
 					return false;
 				}else if(cards1.get(0)%13 > cards2.get(0)%13){
 					return true;
@@ -157,109 +158,109 @@ public class Player {
 					return false;
 				}
 			}else {
-				//Íæ¼Ò³öÒ»ÕÅ£¬¶Ô·½³ö¶àÓÚÒ»ÕÅ
+				//ç©å®¶å‡ºä¸€å¼ ï¼Œå¯¹æ–¹å‡ºå¤šäºä¸€å¼ 
 				return false;
 			}
 		}else {
-			//ÅÆÊı¸ü¶àµÄµ¥Ë³£¬Ë«Ë³£¬ÈıË³
+			//ç‰Œæ•°æ›´å¤šçš„å•é¡ºï¼ŒåŒé¡ºï¼Œä¸‰é¡º
 			if(cards1.size() == cards2.size()) {
-				//³öÅÆÏàÍ¬µÄÇé¿ö
+				//å‡ºç‰Œç›¸åŒçš„æƒ…å†µ
 				if(cards1.get(cards1.size() - 1)%13 - cards1.get(0)%13 == 
 						cards2.get(cards2.size() - 1)%13 - 
 						cards2.get(0)%13) {
-					//ÅĞ¶Ï¶şÕß³öµÄË³×ÓÖÖÀàÊÇ·ñÏàÍ¬
+					//åˆ¤æ–­äºŒè€…å‡ºçš„é¡ºå­ç§ç±»æ˜¯å¦ç›¸åŒ
 					return cards1.get(0)%13 > cards2.get(0)%13?true:false;
 				}else {
-					//Ë³×ÓÖÖÀà²»Í¬£¬Ò»¶¨Ñ¹²»¹ı
+					//é¡ºå­ç§ç±»ä¸åŒï¼Œä¸€å®šå‹ä¸è¿‡
 					return false;
 				}
 			}else {
-				//³öÅÆÊıÁ¿²»Í¬£¬Ò»¶¨Ñ¹²»¹ı
+				//å‡ºç‰Œæ•°é‡ä¸åŒï¼Œä¸€å®šå‹ä¸è¿‡
 				return false;
 			}
 		}
 	}
-	/**ÅĞ¶Ï³öµÄÅÆÊÇ·ñ·ûºÏ¹æÔò
+	/**åˆ¤æ–­å‡ºçš„ç‰Œæ˜¯å¦ç¬¦åˆè§„åˆ™
 	 * */
 	public static boolean isCorrect(ArrayList<Integer> cards) {
 		if(cards.isEmpty()) 
-			//²»³öÅÆÒ»¶¨²»·ûºÏ¹æÔò
+			//ä¸å‡ºç‰Œä¸€å®šä¸ç¬¦åˆè§„åˆ™
 			return false;
 		else if(cards.size() == 1) 
-			//µ¥ÅÆÒ»¶¨·ûºÏ¹æÔò
+			//å•ç‰Œä¸€å®šç¬¦åˆè§„åˆ™
 			return true;
 		else if(cards.size() == 2) {
-			//ÅĞ¶ÏË«ÅÆµÄÇé¿ö
+			//åˆ¤æ–­åŒç‰Œçš„æƒ…å†µ
 			if(cards.get(0) >= 52 && cards.get(0) >= 52) 
-				//¶¼ÊÇ´óĞ¡Íõ£¬·ûºÏ¹æÔò
+				//éƒ½æ˜¯å¤§å°ç‹ï¼Œç¬¦åˆè§„åˆ™
 				return true;
 			else if(cards.get(0) >= 52 && cards.get(0) < 52) 
-				//Ò»¸öÊÇ´óĞ¡Íõ£¬Ò»¸ö²»ÊÇ£¬²»·ûºÏ
+				//ä¸€ä¸ªæ˜¯å¤§å°ç‹ï¼Œä¸€ä¸ªä¸æ˜¯ï¼Œä¸ç¬¦åˆ
 				return false;
 			else if(cards.get(0) < 52 && cards.get(0) >= 52) 
-				//Ò»¸öÊÇ´óĞ¡Íõ£¬Ò»¸ö²»ÊÇ£¬²»·ûºÏ
+				//ä¸€ä¸ªæ˜¯å¤§å°ç‹ï¼Œä¸€ä¸ªä¸æ˜¯ï¼Œä¸ç¬¦åˆ
 				return false;
 			else if(cards.get(0)%13 == cards.get(1)%13)
-				//¶¼²»ÊÇ´óĞ¡Íõ£¬ÈôÁ½ÅÆÏàÍ¬£¬Ôò·ûºÏ¹æÔò
+				//éƒ½ä¸æ˜¯å¤§å°ç‹ï¼Œè‹¥ä¸¤ç‰Œç›¸åŒï¼Œåˆ™ç¬¦åˆè§„åˆ™
 				return true;
 			else 
-				//¶¼²»ÊÇ´óĞ¡Íõ£¬ÈôÁ½ÅÆ²»Í¬£¬Ôò²»·ûºÏ¹æÔò
+				//éƒ½ä¸æ˜¯å¤§å°ç‹ï¼Œè‹¥ä¸¤ç‰Œä¸åŒï¼Œåˆ™ä¸ç¬¦åˆè§„åˆ™
 				return false;
 		}else if(cards.size() == 3) {
-			//ÅĞ¶ÏÈıÅÆµÄÇé¿ö
+			//åˆ¤æ–­ä¸‰ç‰Œçš„æƒ…å†µ
 			return cards.get(0)%13 == cards.get(2)%13?true:false;
 		}else if(cards.size() == 4) {
 			if(cards.get(0)%13 == cards.get(3)%13) 
-				//ÈôËÄÕÅÅÆÏàÍ¬£¬·ûºÏ¹æÔò
+				//è‹¥å››å¼ ç‰Œç›¸åŒï¼Œç¬¦åˆè§„åˆ™
 				return true;
 			else if(cards.get(0)%13 == cards.get(2)%13)
-				//ÈôËÄÕÅÅÆÈ«²»Í¬£¬µ«Ç°ÈıÕÅÏàÍ¬£¨Èı´øÒ»£©Ôò·ûºÏ¹æÔò
+				//è‹¥å››å¼ ç‰Œå…¨ä¸åŒï¼Œä½†å‰ä¸‰å¼ ç›¸åŒï¼ˆä¸‰å¸¦ä¸€ï¼‰åˆ™ç¬¦åˆè§„åˆ™
 				return true;
 			else if(cards.get(1)%13 == cards.get(3)%13) 
-				//ÈôËÄÕÅÅÆÈ«²»Í¬£¬µ«ºóÈıÕÅÏàÍ¬£¨Èı´øÒ»£©Ôò·ûºÏ¹æÔò
+				//è‹¥å››å¼ ç‰Œå…¨ä¸åŒï¼Œä½†åä¸‰å¼ ç›¸åŒï¼ˆä¸‰å¸¦ä¸€ï¼‰åˆ™ç¬¦åˆè§„åˆ™
 				return true;
 		}else if(cards.size() == 5) {
-			//Èı´ø¶ş»òµ¥Ë³
+			//ä¸‰å¸¦äºŒæˆ–å•é¡º
 			if(cards.get(4)%13 - cards.get(0)%13 == 4 && 
 					isDistinct(cards, 1, 0, cards.size() - 1)) 
-				//µ¥Ë³
+				//å•é¡º
 				return true;
 			else if(cards.get(0)%13 == cards.get(2)%13 && 
 					cards.get(3)%13 == cards.get(4)%13) 
-				//ÈôÎªÇ°ÈıÕÅÅÆÏàÍ¬µÄÈı´ø¶ş£¬Ôò·ûºÏ¹æÔò
+				//è‹¥ä¸ºå‰ä¸‰å¼ ç‰Œç›¸åŒçš„ä¸‰å¸¦äºŒï¼Œåˆ™ç¬¦åˆè§„åˆ™
 				return true;
 			else if(cards.get(0)%13 == cards.get(1)%13 && 
 					cards.get(2)%13 == cards.get(4)%13) 
-				//ÈôÎªºóÈıÕÅÅÆÏàÍ¬µÄÈı´ø¶ş£¬Ôò·ûºÏ¹æÔò
+				//è‹¥ä¸ºåä¸‰å¼ ç‰Œç›¸åŒçš„ä¸‰å¸¦äºŒï¼Œåˆ™ç¬¦åˆè§„åˆ™
 				return true;			
 		}else {
-			//ÅÆÊı´óÓÚÎå£¬¼´µ¥Ë³£¬Ë«Ë³£¬ÈıË³
+			//ç‰Œæ•°å¤§äºäº”ï¼Œå³å•é¡ºï¼ŒåŒé¡ºï¼Œä¸‰é¡º
 			if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size() - 1 && 
 							isDistinct(cards, 1, 0, cards.size() - 1)) 
-				//µ¥Ë³£¬·ûºÏ¹æÔò
+				//å•é¡ºï¼Œç¬¦åˆè§„åˆ™
 				return true;
 			else if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size()/2 - 1 && 
 							isDistinct(cards, 2, 0, cards.size() - 1)) 
-				//Ë«Ë³£¬·ûºÏ¹æÔò
+				//åŒé¡ºï¼Œç¬¦åˆè§„åˆ™
 				return true;				
 			else if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size()/3 - 1 && 
 							isDistinct(cards, 3, 0, cards.size() - 1)) 
-				//ÈıË³£¬·ûºÏ¹æÔò
+				//ä¸‰é¡ºï¼Œç¬¦åˆè§„åˆ™
 				return true;			
-			//ËÄ´ø¶ş£¬·É»ú´ø³á°òÌ«¸´ÔÓ£¬ÀÁµÃĞ´
+			//å››å¸¦äºŒï¼Œé£æœºå¸¦ç¿…è†€å¤ªå¤æ‚ï¼Œæ‡’å¾—å†™
 		}
 		return false;
 	}
-	/**ÅĞ¶ÏÒ»×éÅÆÖĞÊÇ·ñ»¥²»ÏàÍ¬£¬ÓÃÀ´¸¨ÖúÅĞ¶Ïµ¥Ë«ÈıË³
+	/**åˆ¤æ–­ä¸€ç»„ç‰Œä¸­æ˜¯å¦äº’ä¸ç›¸åŒï¼Œç”¨æ¥è¾…åŠ©åˆ¤æ–­å•åŒä¸‰é¡º
 	 * */
 	public static boolean isDistinct(ArrayList<Integer> cards,int count
 			,int start,int end) {		
 		if((end - start + 1)%count != 0)
 				return false;
-		//Ë«£¬ÈıË³µÄ¼ìÑé±ØĞëÂú×ãÌØ¶¨µÄ³¤¶È
+		//åŒï¼Œä¸‰é¡ºçš„æ£€éªŒå¿…é¡»æ»¡è¶³ç‰¹å®šçš„é•¿åº¦
 		for(int j = 0;j < count;j++) {
 			for(int i = start + j;i <= end - count + j;i += count) {
 				if(cards.get(i)%13 == cards.get(i + count)%13) {
@@ -269,12 +270,12 @@ public class Player {
 		}		
 		return true;
 	}
-	/**µçÄÔ»ØÅÆ
+	/**ç”µè„‘å›ç‰Œ
 	 * */
 	public ArrayList<Integer> reply(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
 		if(cards.isEmpty()) {
-			//¶Ô·½²»³öÅÆµÄÇé¿ö£¬Ëæ»ú³öÅÆ
+			//å¯¹æ–¹ä¸å‡ºç‰Œçš„æƒ…å†µï¼Œéšæœºå‡ºç‰Œ
 			replyCards = this.replySanshun(cards);
 			if(replyCards.isEmpty())
 				replyCards = this.replyShuangshun(cards);
@@ -293,129 +294,129 @@ public class Player {
 		}else if(cards.size() == 1) {
 			replyCards = this.replyDan(cards);
 		}else if(cards.size() == 2) {
-			//¶Ô·½³öÁ½ÕÅÅÆµÄÇé¿ö
+			//å¯¹æ–¹å‡ºä¸¤å¼ ç‰Œçš„æƒ…å†µ
 			replyCards = this.replyShuang(cards);		
 		}else if(cards.size() == 3) {
-			//Íæ¼Ò³öÈıÕÅÅÆµÄÇé¿ö
+			//ç©å®¶å‡ºä¸‰å¼ ç‰Œçš„æƒ…å†µ
 			replyCards = this.replySan(cards);
 		}else if(cards.size() == 4) {
-			//Íæ¼Ò³öËÄÕÅÅÆµÄÇé¿ö
+			//ç©å®¶å‡ºå››å¼ ç‰Œçš„æƒ…å†µ
 			if(cards.get(0)%13 == cards.get(3)%13) {
-				//Õ¨µÄÇé¿ö
+				//ç‚¸çš„æƒ…å†µ
 				replyCards = this.replyZha(cards);
-				//ÓÉÓÚÍõÕ¨¿ÉÒÔÑ¹¹ıÆÕÍ¨Õ¨£¬ËùÒÔÏÂÃæ»¹ĞèÒª¿¼ÂÇÍõÕ¨µÄÇé¿ö
+				//ç”±äºç‹ç‚¸å¯ä»¥å‹è¿‡æ™®é€šç‚¸ï¼Œæ‰€ä»¥ä¸‹é¢è¿˜éœ€è¦è€ƒè™‘ç‹ç‚¸çš„æƒ…å†µ
 				if(replyCards.isEmpty()) {
-					//Èç¹ûÃ»ÓĞÕÒµ½ÆÕÍ¨Õ¨£¬¾Í¿¼ÂÇÍõÕ¨
+					//å¦‚æœæ²¡æœ‰æ‰¾åˆ°æ™®é€šç‚¸ï¼Œå°±è€ƒè™‘ç‹ç‚¸
 					replyCards = this.replyWangzha(cards);
 				}
 			}else {
-				//Èı´øÒ»µÄÇé¿ö
+				//ä¸‰å¸¦ä¸€çš„æƒ…å†µ
 				replyCards = this.replySandaiyi(cards);
 			}
 		}else if(cards.size() == 5) {
-			//Íæ¼Ò³öÎåÕÅÅÆµÄÇé¿ö£¬¼´Èı´ø¶ş»òµ¥Ë³
+			//ç©å®¶å‡ºäº”å¼ ç‰Œçš„æƒ…å†µï¼Œå³ä¸‰å¸¦äºŒæˆ–å•é¡º
 			replyCards = cards.get(4)%13 - cards.get(0)%13 == 4?
 					this.replyDanshun(cards):this.replySandaier(cards);
 		}else {
-			//µ¥Ë³£¬Ë«Ë³£¬ÈıË³µÄÇé¿ö
+			//å•é¡ºï¼ŒåŒé¡ºï¼Œä¸‰é¡ºçš„æƒ…å†µ
 			if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size() - 1) {
-				//µ¥Ë³				
+				//å•é¡º				
 				replyCards = this.replyDanshun(cards);
 			}else if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size()/2 - 1) {
-				//Ë«Ë³
+				//åŒé¡º
 				replyCards = this.replyShuangshun(cards);
 			}else if(cards.get(cards.size()-1)%13 - cards.get(0)%13 
 					== cards.size()/3 - 1) {
-				//ÈıË³
+				//ä¸‰é¡º
 				replyCards = this.replySanshun(cards);
 			}
 		}
 		if(replyCards.isEmpty()) {
-			//Èç¹ûÕÒÁËÒ»È¦Ã»ÕÒµ½»Ø¸´µÄÅÆ£¬¾ÍÕÒÕ¨»òÍõÕ¨
+			//å¦‚æœæ‰¾äº†ä¸€åœˆæ²¡æ‰¾åˆ°å›å¤çš„ç‰Œï¼Œå°±æ‰¾ç‚¸æˆ–ç‹ç‚¸
 			replyCards = this.replyZha(cards);
 			if(replyCards.isEmpty()) {
-				//Èç¹ûÃ»ÓĞÕÒµ½ÆÕÍ¨Õ¨£¬¾Í¿¼ÂÇÍõÕ¨
+				//å¦‚æœæ²¡æœ‰æ‰¾åˆ°æ™®é€šç‚¸ï¼Œå°±è€ƒè™‘ç‹ç‚¸
 				replyCards = this.replyWangzha(cards);
 			}
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´µ¥ÅÆ
+	/**ç”µè„‘å›å¤å•ç‰Œ
 	 * */
 	public ArrayList<Integer> replyDan(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
 		if(cards.isEmpty()) {
-			//Íæ¼Ò²»³öÅÆµÄÇé¿ö
+			//ç©å®¶ä¸å‡ºç‰Œçš„æƒ…å†µ
 			replyCards.add(this.cards.get(0));
 			this.cards.remove(0);
 		}else {
-			//Íæ¼Ò³öÒ»ÕÅÅÆµÄÇé¿ö
+			//ç©å®¶å‡ºä¸€å¼ ç‰Œçš„æƒ…å†µ
 			if(cards.get(0) == 52) {
-				//Èç¹û³öĞ¡Íõ
+				//å¦‚æœå‡ºå°ç‹
 				if(this.cards.get(this.cards.size()-1) == 53) {
 					replyCards.add(53);
 					this.cards.remove(this.cards.size()-1);
 				}
 			}else if(cards.get(0) < 52){
-				//²»ÊÇ´óĞ¡Íõ
+				//ä¸æ˜¯å¤§å°ç‹
 				for(int i = 0;i < this.cards.size();i++) {
 					if(this.cards.get(i)%13 > cards.get(0)%13 ||
 							this.cards.get(i) >= 52) {
 						replyCards.add(this.cards.get(i));
-						//°ÑÅÆ¼ÓÈëĞòÁĞ
+						//æŠŠç‰ŒåŠ å…¥åºåˆ—
 						this.cards.remove(i);
-						//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+						//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 						break;
-						//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄÒ»ÕÅÅÆ£¬¾Í³öÅÆ
+						//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„ä¸€å¼ ç‰Œï¼Œå°±å‡ºç‰Œ
 					}
 				}
 			}
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´¶Ô×Ó
+	/**ç”µè„‘å›å¤å¯¹å­
 	 * */
 	public ArrayList<Integer> replyShuang(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
 		int num = cards.isEmpty()?-1:cards.get(0)%13;
-		//ÕÒ³ö¶Ô×Ó¶ÔÓ¦µÄÖµ
+		//æ‰¾å‡ºå¯¹å­å¯¹åº”çš„å€¼
 		if(cards.isEmpty()) {
 			for(int i = 0;i < this.cards.size() - 1;i++) {
 				if(this.cards.get(i)%13 > num && 
 						this.cards.get(i)%13 == this.cards.get(i+1)%13) {
 					replyCards.add(this.cards.get(i));
 					replyCards.add(this.cards.get(i+1));
-					//°ÑÅÆ¼ÓÈëĞòÁĞ
+					//æŠŠç‰ŒåŠ å…¥åºåˆ—
 					this.cards.remove(i);
 					this.cards.remove(i);
-					//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+					//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 					break;
-					//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄÁ½ÕÅÅÆ£¬¾Í³öÅÆ
+					//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„ä¸¤å¼ ç‰Œï¼Œå°±å‡ºç‰Œ
 				}
 			}
 		}else {
 			if(cards.get(0)!=52) {
-				//¶ÔÅÆµÄÇé¿ö
+				//å¯¹ç‰Œçš„æƒ…å†µ
 				for(int i = 0;i < this.cards.size() - 1;i++) {
 					if(this.cards.get(i)%13 > num && 
 							this.cards.get(i)%13 == this.cards.get(i+1)%13) {
 						replyCards.add(this.cards.get(i));
 						replyCards.add(this.cards.get(i+1));
-						//°ÑÅÆ¼ÓÈëĞòÁĞ
+						//æŠŠç‰ŒåŠ å…¥åºåˆ—
 						this.cards.remove(i);
 						this.cards.remove(i);
-						//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+						//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 						break;
-						//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄÁ½ÕÅÅÆ£¬¾Í³öÅÆ
+						//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„ä¸¤å¼ ç‰Œï¼Œå°±å‡ºç‰Œ
 					}
 				}
-			}//ÍõÕ¨ÎŞ·¨½Ó£¬ËùÒÔÖ±½ÓÌø¹ı
+			}//ç‹ç‚¸æ— æ³•æ¥ï¼Œæ‰€ä»¥ç›´æ¥è·³è¿‡
 		}			
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´ÈıÕÅÅÆ
+	/**ç”µè„‘å›å¤ä¸‰å¼ ç‰Œ
 	 * */
 	public ArrayList<Integer> replySan(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
@@ -426,29 +427,29 @@ public class Player {
 				replyCards.add(this.cards.get(i));
 				replyCards.add(this.cards.get(i+1));
 				replyCards.add(this.cards.get(i+2));
-				//°ÑÅÆ¼ÓÈëĞòÁĞ
+				//æŠŠç‰ŒåŠ å…¥åºåˆ—
 				this.cards.remove(i);
 				this.cards.remove(i);
 				this.cards.remove(i);
-				//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+				//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 				break;
-				//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄÈıÕÅÅÆ£¬¾Í³öÅÆ
+				//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„ä¸‰å¼ ç‰Œï¼Œå°±å‡ºç‰Œ
 			}
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´Èı´øÒ»
+	/**ç”µè„‘å›å¤ä¸‰å¸¦ä¸€
 	 * */
 	public ArrayList<Integer> replySandaiyi(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
-		int num = 0;//¼ÇÂ¼Èı´øÒ»ÖĞÈıµÄÖµ
+		int num = 0;//è®°å½•ä¸‰å¸¦ä¸€ä¸­ä¸‰çš„å€¼
 		if(cards.isEmpty()) 
 			num = -1;
 		else if(cards.get(0)%13 == cards.get(2)%13) 
-			//Ç°ÈıÕÅÅÆÏàÍ¬µÄÇé¿ö
+			//å‰ä¸‰å¼ ç‰Œç›¸åŒçš„æƒ…å†µ
 			num = cards.get(0);
 		else 
-			//ºóÈıÕÅÅÆÏàÍ¬µÄÇé¿ö
+			//åä¸‰å¼ ç‰Œç›¸åŒçš„æƒ…å†µ
 			num = cards.get(1);	
 		for(int i = 0;i < this.cards.size() - 2;i++) {
 			if(this.cards.get(i)%13 > num && 
@@ -456,37 +457,37 @@ public class Player {
 				replyCards.add(this.cards.get(i));
 				replyCards.add(this.cards.get(i+1));
 				replyCards.add(this.cards.get(i+2));
-				//°ÑÏàÍ¬µÄÈıÕÅÅÆ¼ÓÈëĞòÁĞ
+				//æŠŠç›¸åŒçš„ä¸‰å¼ ç‰ŒåŠ å…¥åºåˆ—
 				if(i+3 < this.cards.size()) {
-					//¼ÓÈëµ¥ÅÆ
+					//åŠ å…¥å•ç‰Œ
 					replyCards.add(this.cards.get(i+3));
 					this.cards.remove(i);
 					this.cards.remove(i);
 					this.cards.remove(i);
 					this.cards.remove(i);
-					//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+					//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 				}else {
 					if(i > 0) {
-						//¼ÓÈëµ¥ÅÆ
+						//åŠ å…¥å•ç‰Œ
 						replyCards.add(0,this.cards.get(i-1));
-						//ÔÚÇ°Ãæ¼ÓÈë
+						//åœ¨å‰é¢åŠ å…¥
 						this.cards.remove(i-1);
 						this.cards.remove(i-1);
 						this.cards.remove(i-1);
 						this.cards.remove(i-1);
-						//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+						//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 					}else {
-						//Èç¹ûÕÒ²»µ½µ¥ÅÆ£¬¾ÍÎŞ·¨»Ø¸´
+						//å¦‚æœæ‰¾ä¸åˆ°å•ç‰Œï¼Œå°±æ— æ³•å›å¤
 						replyCards.clear();
 					}
 				}						
 				break;
-				//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄÈı´øÒ»£¬¾Í³öÅÆ
+				//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„ä¸‰å¸¦ä¸€ï¼Œå°±å‡ºç‰Œ
 			}
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´Èı´ø¶ş
+	/**ç”µè„‘å›å¤ä¸‰å¸¦äºŒ
 	 * */
 	public ArrayList<Integer> replySandaier(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
@@ -503,25 +504,25 @@ public class Player {
 				replyCards.add(this.cards.get(i));
 				replyCards.add(this.cards.get(i+1));
 				replyCards.add(this.cards.get(i+2));
-				//°ÑÏàÍ¬µÄÈıÕÅÅÆ¼ÓÈëĞòÁĞ
+				//æŠŠç›¸åŒçš„ä¸‰å¼ ç‰ŒåŠ å…¥åºåˆ—
 				if(i+4 < this.cards.size()) {
-					//¼ÓÈëÁ½ÕÅ´øµÄÅÆ
+					//åŠ å…¥ä¸¤å¼ å¸¦çš„ç‰Œ
 					for(int j = i+3;j < this.cards.size()-1;j++) {
 						if(this.cards.get(j)%13 == this.cards.get(j+1)%13) {
 							replyCards.add(this.cards.get(j));
 							replyCards.add(this.cards.get(j+1));
-							//¼ÓÈëÅÆ
+							//åŠ å…¥ç‰Œ
 							this.cards.remove(j);
 							this.cards.remove(j);
 							this.cards.remove(i);
 							this.cards.remove(i);
 							this.cards.remove(i);
-							//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+							//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 							break;
 						}
 					}
 					if(replyCards.size() == 3) 
-						//ÈôÃ»ÕÒµ½´øµÄÁ½ÕÅÅÆ£¬ÔòÎŞ·¨»Ø¸´
+						//è‹¥æ²¡æ‰¾åˆ°å¸¦çš„ä¸¤å¼ ç‰Œï¼Œåˆ™æ— æ³•å›å¤
 						replyCards.clear();					
 				}else {
 					if(i > 1) {
@@ -529,21 +530,21 @@ public class Player {
 							if(this.cards.get(j)%13 == this.cards.get(j+1)%13) {
 								replyCards.add(0,this.cards.get(j));
 								replyCards.add(0,this.cards.get(j+1));
-								//¼ÓÈëÅÆ
+								//åŠ å…¥ç‰Œ
 								this.cards.remove(i);
 								this.cards.remove(i);
 								this.cards.remove(i);
 								this.cards.remove(j);
 								this.cards.remove(j);
-								//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+								//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 								break;
 							}
 						}
 						if(replyCards.size() == 3) 
-							//ÈôÃ»ÕÒµ½´øµÄÁ½ÕÅÅÆ£¬ÔòÎŞ·¨»Ø¸´
+							//è‹¥æ²¡æ‰¾åˆ°å¸¦çš„ä¸¤å¼ ç‰Œï¼Œåˆ™æ— æ³•å›å¤
 							replyCards.clear();						
 					}else {
-						//ÈôÃ»ÕÒµ½´øµÄÁ½ÕÅÅÆ£¬ÔòÎŞ·¨»Ø¸´
+						//è‹¥æ²¡æ‰¾åˆ°å¸¦çš„ä¸¤å¼ ç‰Œï¼Œåˆ™æ— æ³•å›å¤
 						replyCards.clear();
 					}
 				}						
@@ -552,39 +553,39 @@ public class Player {
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´µ¥Ë³
+	/**ç”µè„‘å›å¤å•é¡º
 	 * */
 	public ArrayList<Integer> replyDanshun(ArrayList<Integer> cards){
 		return this.replyShunzi(cards, 1);
 	}
-	/**µçÄÔ»Ø¸´Ë«Ë³
+	/**ç”µè„‘å›å¤åŒé¡º
 	 * */
 	public ArrayList<Integer> replyShuangshun(ArrayList<Integer> cards){
 		return this.replyShunzi(cards, 2);
 	}
-	/**µçÄÔ»Ø¸´ÈıË³
+	/**ç”µè„‘å›å¤ä¸‰é¡º
 	 * */
 	public ArrayList<Integer> replySanshun(ArrayList<Integer> cards){
 		return this.replyShunzi(cards, 3);
 	}
-	/**»Ø¸´µ¥£¬Ë«£¬ÈıË³µÄ»ù´¡·½·¨
+	/**å›å¤å•ï¼ŒåŒï¼Œä¸‰é¡ºçš„åŸºç¡€æ–¹æ³•
 	 * */
 	public ArrayList<Integer> replyShunzi(ArrayList<Integer> cards, 
 			int length){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
 		int num = cards.isEmpty()?-1:cards.get(0);
-		//ÕÒµ½¶Ô·½³öµÄË³µÄ×îĞ¡Öµ£¬Èô¿Õ£¬Ôò¶¨Îª-1
+		//æ‰¾åˆ°å¯¹æ–¹å‡ºçš„é¡ºçš„æœ€å°å€¼ï¼Œè‹¥ç©ºï¼Œåˆ™å®šä¸º-1
 		int k = cards.isEmpty()?this.cards.size():cards.size();
-		//¿ØÖÆË³×ÓµÄ³¤¶È
+		//æ§åˆ¶é¡ºå­çš„é•¿åº¦
 		for(int l = k;l >= 5 + length/2;l--) {
-			//´Ó×î³¤¿ªÊ¼ÕÒË³×Ó
+			//ä»æœ€é•¿å¼€å§‹æ‰¾é¡ºå­
 			for(int i = 0;i < this.cards.size() - l + 1;i++) {
 				if(this.cards.get(i)%13 > num &&
 						this.cards.get(i + l - 1)%13 - 
 						this.cards.get(i)%13 == l/length - 1 && 
 								isDistinct(this.cards, length, i, 
 										i + l - 1)) {
-					//ÈôÕÒµ½ÁËË³£¬¾Í¼ÓÈë
+					//è‹¥æ‰¾åˆ°äº†é¡ºï¼Œå°±åŠ å…¥
 					for(int j = i;j < i + l;j++) {
 						replyCards.add(this.cards.get(i));
 						this.cards.remove(i);
@@ -594,14 +595,14 @@ public class Player {
 			}
 			if(!cards.isEmpty()) 
 				break;
-				//Èç¹û¶Ô·½²»ÊÇ¿Õ£¬Ôò²»¹ÜÕÒÃ»ÕÒµ½£¬Ö±½ÓÌø³ö			
+				//å¦‚æœå¯¹æ–¹ä¸æ˜¯ç©ºï¼Œåˆ™ä¸ç®¡æ‰¾æ²¡æ‰¾åˆ°ï¼Œç›´æ¥è·³å‡º			
 			if(!replyCards.isEmpty()) 
 				break;
-				//Èç¹ûÕÒµ½ÁËË³×Ó£¬ÔòÌø³ö			
+				//å¦‚æœæ‰¾åˆ°äº†é¡ºå­ï¼Œåˆ™è·³å‡º			
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´Õ¨
+	/**ç”µè„‘å›å¤ç‚¸
 	 * */
 	public ArrayList<Integer> replyZha(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
@@ -613,19 +614,19 @@ public class Player {
 				replyCards.add(this.cards.get(i+1));
 				replyCards.add(this.cards.get(i+2));
 				replyCards.add(this.cards.get(i+3));
-				//°ÑÅÆ¼ÓÈëĞòÁĞ
+				//æŠŠç‰ŒåŠ å…¥åºåˆ—
 				this.cards.remove(i);
 				this.cards.remove(i);
 				this.cards.remove(i);
 				this.cards.remove(i);
-				//°ÑÅÆ´ÓÏÖÓĞÅÆÖĞÈ¥µô
+				//æŠŠç‰Œä»ç°æœ‰ç‰Œä¸­å»æ‰
 				break;
-				//ÈôÔÚÏÖÓĞÅÆÖĞÕÒµ½±È¶Ô·½´óµÄËÄÕÅÅÆ£¬¾Í³öÅÆ
+				//è‹¥åœ¨ç°æœ‰ç‰Œä¸­æ‰¾åˆ°æ¯”å¯¹æ–¹å¤§çš„å››å¼ ç‰Œï¼Œå°±å‡ºç‰Œ
 			}
 		}
 		return replyCards;
 	}
-	/**µçÄÔ»Ø¸´ÍõÕ¨
+	/**ç”µè„‘å›å¤ç‹ç‚¸
 	 * */
 	public ArrayList<Integer> replyWangzha(ArrayList<Integer> cards){
 		ArrayList<Integer> replyCards = new ArrayList<Integer>();
@@ -634,15 +635,15 @@ public class Player {
 					this.cards.get(this.cards.size()-1) == 53) {
 				replyCards.add(52);
 				replyCards.add(53);
-				//°Ñ´óĞ¡Íõ¼ÓÈëĞòÁĞ
+				//æŠŠå¤§å°ç‹åŠ å…¥åºåˆ—
 				this.cards.remove(this.cards.size()-1);
 				this.cards.remove(this.cards.size()-1);
-				//°Ñ´óĞ¡ÍõÒÆ³öÏÖÓĞµÄÅÆ
+				//æŠŠå¤§å°ç‹ç§»å‡ºç°æœ‰çš„ç‰Œ
 			}
 		}		
 		return replyCards;
 	}
-	/**Ö÷º¯Êı
+	/**ä¸»å‡½æ•°
 	 * */
 	public static void main(String[] args) {
 		Main.main(args);
