@@ -1,7 +1,8 @@
 package game;
 /*
- * ¶·µØÖ÷Ğ¡ÓÎÏ·
- * ×÷Õß£ºÍõºÕ20201863
+ * æ–—åœ°ä¸»å°æ¸¸æˆ
+ * Author: Henry Wang
+ * Date: 2021-4-22
  * */
 
 
@@ -21,22 +22,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-/**Ö÷Àà
+/**ä¸»ç±»
  * */
 public class Main {
-	/**Ö÷´°Ìå
+	/**ä¸»çª—ä½“
 	 * */
 	static JFrame jf = null;
-	/**¶Ô»°¿ò
+	/**å¯¹è¯æ¡†
 	 * */
 	static JDialog jd = null;
-	/**ÏÔÊ¾¶Ô·½³öµÄÅÆµÄ°´Å¥Êı×é
+	/**æ˜¾ç¤ºå¯¹æ–¹å‡ºçš„ç‰Œçš„æŒ‰é’®æ•°ç»„
 	 * */
 	static JButton[] jb1 = new JButton[20];
-	/**ÏÔÊ¾Íæ¼ÒÓµÓĞµÄÅÆµÄ°´Å¥Êı×é
+	/**æ˜¾ç¤ºç©å®¶æ‹¥æœ‰çš„ç‰Œçš„æŒ‰é’®æ•°ç»„
 	 * */
 	static JButton[] jb2 = new JButton[20];
-	/**¿ØÖÆÑ¡ÖĞÅÆµÄÊó±êÊÂ¼ş½Ó¿ÚÊı×é
+	/**æ§åˆ¶é€‰ä¸­ç‰Œçš„é¼ æ ‡äº‹ä»¶æ¥å£æ•°ç»„
 	 * */
 	static ActionListener ac[] = new ActionListener[20];
 	/**npc1
@@ -45,85 +46,85 @@ public class Main {
 	/**npc2
 	 * */
 	static Player p2 = new Player();
-	/**Íæ¼Ò
+	/**ç©å®¶
 	 * */
 	static Player p3 = new Player();
-	/**Íæ¼Ò³öµÄÅÆ
+	/**ç©å®¶å‡ºçš„ç‰Œ
 	 * */
 	static ArrayList<Integer> currentCards = new ArrayList<Integer>();
-	/**Ö÷º¯Êı
+	/**ä¸»å‡½æ•°
 	 * */
 	public static void main(String[] args) {
-		initializeFrame();//³õÊ¼»¯´°Ìå
-		grant();//·¢ÅÆ
-		control();//½øÈëÓÎÏ·Á÷³Ì	
+		initializeFrame();//åˆå§‹åŒ–çª—ä½“
+		grant();//å‘ç‰Œ
+		control();//è¿›å…¥æ¸¸æˆæµç¨‹	
 	}
-	/**¿ØÖÆÓÎÍæÁ÷³Ì
+	/**æ§åˆ¶æ¸¸ç©æµç¨‹
 	 * */
 	public static void control(int n) {
 		System.out.println("count is: "+Player.count);
 		if(Player.count == 2) {
-			//Èç¹ûÒ»¸öÈË³öÅÆÁ½¸öÈË¶¼²»Òª£¬ÔòÕâ¸öÈËÔÙËæ±ã³öÅÆ
+			//å¦‚æœä¸€ä¸ªäººå‡ºç‰Œä¸¤ä¸ªäººéƒ½ä¸è¦ï¼Œåˆ™è¿™ä¸ªäººå†éšä¾¿å‡ºç‰Œ
 			currentCards.clear();
 			Player.count = 0;
 		}
-		//n´ú±í½ÓÏÂÀ´¸ÃË­³öÅÆ£¬1´ú±ínpc1£¬2´ú±ínpc2£¬3´ú±íÍæ¼Ò
+		//nä»£è¡¨æ¥ä¸‹æ¥è¯¥è°å‡ºç‰Œï¼Œ1ä»£è¡¨npc1ï¼Œ2ä»£è¡¨npc2ï¼Œ3ä»£è¡¨ç©å®¶
 		if(n == 1) {
-			//¸Ãnpc1³öÅÆ
+			//è¯¥npc1å‡ºç‰Œ
 			ArrayList<Integer> replyCards = p1.reply(currentCards);
 			if(p1.cards.isEmpty()) {
 				jf.setVisible(false);
 				if(p1.isLandlord || p3.isLandlord) {
-					createDialog("¾¯¸æ", "ÄãÊäÁË£¡",true);
+					createDialog("è­¦å‘Š", "ä½ è¾“äº†ï¼",true);
 				}else if(p2.isLandlord){
-					createDialog("¹§Ï²", "ÄãÓ®ÁË£¡",true);
+					createDialog("æ­å–œ", "ä½ èµ¢äº†ï¼",true);
 				}	
 			}
-			//npc1³öÅÆ
+			//npc1å‡ºç‰Œ
 			if(!replyCards.isEmpty()) {
-				//npc1ÒªÁË
+				//npc1è¦äº†
 				currentCards = replyCards;
 				Player.count = 0;
 			}else {
 				Player.count++;
 			}
-			System.out.println("npc1³ö"+replyCards.size()+"ÕÅÅÆ");
-			control(2);//npc1³öÅÆºóÈÃnpc2³öÅÆ
+			System.out.println("npc1å‡º"+replyCards.size()+"å¼ ç‰Œ");
+			control(2);//npc1å‡ºç‰Œåè®©npc2å‡ºç‰Œ
 		}else if(n == 2) {
-			//¸Ãnpc2³öÅÆ
+			//è¯¥npc2å‡ºç‰Œ
 			ArrayList<Integer> replyCards = p2.reply(currentCards);
 			if(p2.cards.isEmpty()) {
 				jf.setVisible(false);
 				if(p2.isLandlord || p3.isLandlord) {
-					createDialog("¾¯¸æ", "ÄãÊäÁË£¡",true);
+					createDialog("è­¦å‘Š", "ä½ è¾“äº†ï¼",true);
 				}else {
-					createDialog("¹§Ï²", "ÄãÓ®ÁË£¡",true);
+					createDialog("æ­å–œ", "ä½ èµ¢äº†ï¼",true);
 				}				
 			}
 			if(!replyCards.isEmpty()) {
-				//npc2ÒªÁËnpc1µÄÅÆ
+				//npc2è¦äº†npc1çš„ç‰Œ
 				currentCards = replyCards;
 				Player.count = 0;
 			}else {
 				Player.count++;
 			}
-			System.out.println("npc2³ö"+replyCards.size()+"ÕÅÅÆ");
-			control(3);//npc2³öÅÆºóÈÃÍæ¼Ò³öÅÆ
+			System.out.println("npc2å‡º"+replyCards.size()+"å¼ ç‰Œ");
+			control(3);//npc2å‡ºç‰Œåè®©ç©å®¶å‡ºç‰Œ
 		}else {
-			new Main().showCards();//ÏÔÊ¾ÅÆ£¬½ÓÏÂÀ´Íæ¼Ò³öÅÆ
+			new Main().showCards();//æ˜¾ç¤ºç‰Œï¼Œæ¥ä¸‹æ¥ç©å®¶å‡ºç‰Œ
 		}
 	}
-	/**¿ØÖÆÓÎÍæÁ÷³Ì
+	/**æ§åˆ¶æ¸¸ç©æµç¨‹
 	 * */
 	public static void control() {
 		if(p1.isLandlord) 
-			control(1);//npc1ÊÇµØÖ÷£¬½øÈë1
+			control(1);//npc1æ˜¯åœ°ä¸»ï¼Œè¿›å…¥1
 		else if(p2.isLandlord) 
-			control(2);//npc2ÊÇµØÖ÷£¬½øÈë2
+			control(2);//npc2æ˜¯åœ°ä¸»ï¼Œè¿›å…¥2
 		else 
-			control(3);//Íæ¼ÒÊÇµØÖ÷£¬½øÈë3		
+			control(3);//ç©å®¶æ˜¯åœ°ä¸»ï¼Œè¿›å…¥3		
 	}
-	/**³õÊ¼»¯Ö÷´°Ìå
+	/**åˆå§‹åŒ–ä¸»çª—ä½“
 	 * */
 	public static void initializeFrame() {
 		jf = new JFrame("fight against landlords");
@@ -131,7 +132,7 @@ public class Main {
 		jf.setLocationRelativeTo(null);
 		jf.setResizable(false);
 		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);		
-		System.out.println("Ö÷´°Ìå´´½¨Õı³£");
+		System.out.println("ä¸»çª—ä½“åˆ›å»ºæ­£å¸¸");
 		Container con = jf.getContentPane();
 		con.setLayout(new GridLayout(3,1));
 		JPanel jp1 = new JPanel();
@@ -143,14 +144,14 @@ public class Main {
 		con.add(jp1);
 		con.add(jp2);
 		con.add(jp3);
-		JButton jb11 = new JButton("³öÅÆ");
-		JButton jb12 = new JButton("²»Òª");
-		JButton jb13 = new JButton("ÍË³ö");
+		JButton jb11 = new JButton("å‡ºç‰Œ");
+		JButton jb12 = new JButton("ä¸è¦");
+		JButton jb13 = new JButton("é€€å‡º");
 		jp3.add(jb11);
 		jp3.add(jb12);
 		jp3.add(jb13);
 		jf.setVisible(true);
-		//¸ø·¢ÅÆ°´Å¥Ìí¼ÓÊó±êÊÂ¼ş
+		//ç»™å‘ç‰ŒæŒ‰é’®æ·»åŠ é¼ æ ‡äº‹ä»¶
 		jb11.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -161,32 +162,32 @@ public class Main {
 				}
 				if(Player.isCorrect(selectedCards)) {
 					if(Player.isBigger(selectedCards, currentCards)) {
-						//Èç¹ûÍæ¼Ò³öµÄÅÆ·ûºÏ¹æÔòÇÒÄÜÑ¹¹ıµçÄÔ³öµÄÅÆ
+						//å¦‚æœç©å®¶å‡ºçš„ç‰Œç¬¦åˆè§„åˆ™ä¸”èƒ½å‹è¿‡ç”µè„‘å‡ºçš„ç‰Œ
 						for(int i = 0;i < selectedCards.size();i++) {
-							//°Ñ·¢³öÈ¥µÄÅÆÈ¥µô
+							//æŠŠå‘å‡ºå»çš„ç‰Œå»æ‰
 							int index = p3.cards.indexOf(selectedCards.get(i));
 							p3.cards.remove(index);
 							p3.isSelected.remove(index);
 						}
-						//°ÑÒÑÑ¡ÖĞµÄÅÆµÄĞòÁĞÇå¿Õ
+						//æŠŠå·²é€‰ä¸­çš„ç‰Œçš„åºåˆ—æ¸…ç©º
 						currentCards = selectedCards;
-						System.out.println("³öÅÆ³É¹¦");
+						System.out.println("å‡ºç‰ŒæˆåŠŸ");
 						if(p3.cards.isEmpty()) {
 							jf.setVisible(false);
-							createDialog("¹§Ï²", "ÄãÓ®ÁË",true);
+							createDialog("æ­å–œ", "ä½ èµ¢äº†",true);
 						}else {
 							Player.count = 0;
-							control(1);//Íæ¼Ò³öÅÆºóÓÉnpc1³öÅÆ
+							control(1);//ç©å®¶å‡ºç‰Œåç”±npc1å‡ºç‰Œ
 						}
 					}else {
-						createDialog("¾¯¸æ", "·¢µÄÅÆÑ¹²»¹ı",false);
+						createDialog("è­¦å‘Š", "å‘çš„ç‰Œå‹ä¸è¿‡",false);
 					}
 				}else {
-					createDialog("¾¯¸æ", "³öÅÆ²»·ûºÏ¹æÔò",false);
+					createDialog("è­¦å‘Š", "å‡ºç‰Œä¸ç¬¦åˆè§„åˆ™",false);
 				}	
 			}
 		});
-		//¸øÌø¹ı°´Å¥Ìí¼ÓÊó±êÊÂ¼ş
+		//ç»™è·³è¿‡æŒ‰é’®æ·»åŠ é¼ æ ‡äº‹ä»¶
 		jb12.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -194,42 +195,42 @@ public class Main {
 					p3.isSelected.set(i, false);
 				}
 				Player.count++;
-				control(1);//Íæ¼ÒÌø¹ıºóÓÉnpc1³öÅÆ
+				control(1);//ç©å®¶è·³è¿‡åç”±npc1å‡ºç‰Œ
 			}
 		});
-		//¸øÍË³ö°´Å¥Ìí¼ÓÊó±êÊÂ¼ş
+		//ç»™é€€å‡ºæŒ‰é’®æ·»åŠ é¼ æ ‡äº‹ä»¶
 		jb13.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);//ÍË³ö³ÌĞò
+				System.exit(0);//é€€å‡ºç¨‹åº
 			}
 		});
-		//³õÊ¼»¯°´Å¥Êı×é
+		//åˆå§‹åŒ–æŒ‰é’®æ•°ç»„
 		for(int i = 0;i < 20;i++) {
 			jb1[i] = new JButton();
 			jb2[i] = new JButton();
 			jp1.add(jb1[i]);
 			jp2.add(jb2[i]);
 		}
-		jiaoDizhu();//½øÈë½ĞµØÖ÷³ÌĞò
+		jiaoDizhu();//è¿›å…¥å«åœ°ä¸»ç¨‹åº
 	}
-	/**·¢ÅÆ
+	/**å‘ç‰Œ
 	 * */
 	public static void grant() {
-		System.out.println("½øÈë·¢ÅÆ³ÌĞò");
-		//´¢´æËùÓĞÅÆµÄÊı×é
+		System.out.println("è¿›å…¥å‘ç‰Œç¨‹åº");
+		//å‚¨å­˜æ‰€æœ‰ç‰Œçš„æ•°ç»„
 		ArrayList<Integer> totalCards = new ArrayList<Integer>();
 		for(int i = 0;i < 54;i++) 
 			totalCards.add(i);		
-		//µØÖ÷µÄ3ÕÅÅÆ
+		//åœ°ä¸»çš„3å¼ ç‰Œ
 		ArrayList<Integer> pk = new ArrayList<Integer>();
 		for(int i = 0;i < 3;i++) {
-			//´Ó×ÜÅÆÖĞËæ»ú³é³ö3ÕÅ
+			//ä»æ€»ç‰Œä¸­éšæœºæŠ½å‡º3å¼ 
 			int n = (int)Math.random()*totalCards.size();
 			pk.add(totalCards.get(n));
 			totalCards.remove(n);
 		}
-		//Ëæ»ú·¢ÅÆ
+		//éšæœºå‘ç‰Œ
 		for(int i = 0;i < 17;i++) {
 			int n = (int)(Math.random()*totalCards.size());
 			p1.cards.add(totalCards.get(n));
@@ -244,7 +245,7 @@ public class Main {
 			p3.isSelected.add(false);
 			totalCards.remove(n);
 		}
-		//°ÑÔ¤ÁôµÄÈıÕÅÅÆ¸øµØÖ÷
+		//æŠŠé¢„ç•™çš„ä¸‰å¼ ç‰Œç»™åœ°ä¸»
 		if(p1.isLandlord) {
 			for(int i = 0;i < pk.size();i++) {
 				p1.cards.add(pk.get(i));
@@ -261,32 +262,32 @@ public class Main {
 				p3.isSelected.add(false);
 			}
 		}
-		//¶ÔÅÆ½øĞĞÅÅĞò
+		//å¯¹ç‰Œè¿›è¡Œæ’åº
 		p1.sort();
 		p2.sort();
 		p3.sort();
-		System.out.println("·¢ÅÆ½áÊø");		
-		System.out.println("Íæ¼ÒÓĞ"+p3.cards.size()+"ÕÅÅÆ");
-		new Main().initializeButtons();//³õÊ¼»¯°´Å¥
-		new Main().showCards();//°ÑÅÆÏÔÊ¾ÔÚÆÁÄ»ÉÏ
+		System.out.println("å‘ç‰Œç»“æŸ");		
+		System.out.println("ç©å®¶æœ‰"+p3.cards.size()+"å¼ ç‰Œ");
+		new Main().initializeButtons();//åˆå§‹åŒ–æŒ‰é’®
+		new Main().showCards();//æŠŠç‰Œæ˜¾ç¤ºåœ¨å±å¹•ä¸Š
 		
 	}
-	/**³õÊ¼»¯°´Å¥
+	/**åˆå§‹åŒ–æŒ‰é’®
 	 * */
 	public void initializeButtons() {
 		for(int i = 0;i < 20;i++) {
 			if(ac[i] != null) 
-				//Èô¸Ã°´Å¥ÒÑÉèÖÃÊó±êÊÂ¼ş£¬ÔòÒÆ³ıÖØĞÂÉèÖÃ
+				//è‹¥è¯¥æŒ‰é’®å·²è®¾ç½®é¼ æ ‡äº‹ä»¶ï¼Œåˆ™ç§»é™¤é‡æ–°è®¾ç½®
 				jb2[i].removeActionListener(ac[i]);			
 		}
 		for(int i = 0;i < p3.cards.size();i++) {			
 			URL url = getClass().
 					getResource("/res/"+p3.cards.get(i)+".jpg");
-			//»ñÈ¡Í¼Æ¬Â·¾¶
-			ImageIcon ic = new ImageIcon(url);//´´½¨icon¶ÔÏó
+			//è·å–å›¾ç‰‡è·¯å¾„
+			ImageIcon ic = new ImageIcon(url);//åˆ›å»ºiconå¯¹è±¡
 			ic.setImage(ic.getImage().
 					getScaledInstance(70, 100,Image.SCALE_DEFAULT));
-			jb2[i].setIcon(ic);//¸ø°´Å¥ÉèÖÃÍ¼Ïñ
+			jb2[i].setIcon(ic);//ç»™æŒ‰é’®è®¾ç½®å›¾åƒ
 			final int loction = i;
 			final ImageIcon imc = new ImageIcon(url);
 			ac[i] = new ActionListener() {
@@ -294,75 +295,75 @@ public class Main {
 				@Override
 				public void actionPerformed(ActionEvent e) {					
 					if(p3.isSelected.get(loction)) {
-						//Èç¹û¸ÃÅÆÒÑ±»Ñ¡ÖĞ£¬ÔòÈ¡ÏûÑ¡ÖĞ
+						//å¦‚æœè¯¥ç‰Œå·²è¢«é€‰ä¸­ï¼Œåˆ™å–æ¶ˆé€‰ä¸­
 						p3.isSelected.set(loction, false);						
 						imc.setImage(imc.getImage().
 								getScaledInstance
 								(70, 100, Image.SCALE_DEFAULT));
-						jb2[loction].setIcon(imc);//¸ü¸ÄÍ¼±êËõ·Å
-						System.out.println(loction+"È¡ÏûÑ¡ÖĞ³É¹¦");
+						jb2[loction].setIcon(imc);//æ›´æ”¹å›¾æ ‡ç¼©æ”¾
+						System.out.println(loction+"å–æ¶ˆé€‰ä¸­æˆåŠŸ");
 					}else {
-						//Èç¹û¸ÃÅÆÃ»ÓĞÑ¡ÖĞ£¬ÔòÑ¡ÖĞ
+						//å¦‚æœè¯¥ç‰Œæ²¡æœ‰é€‰ä¸­ï¼Œåˆ™é€‰ä¸­
 						p3.isSelected.set(loction, true);						
 						imc.setImage(imc.getImage().
 								getScaledInstance
 								(70, 120, Image.SCALE_DEFAULT));
-						jb2[loction].setIcon(imc);//¸ü¸ÄÍ¼±êËõ·Å
-						System.out.println(loction+"Ñ¡ÖĞ³É¹¦");						
+						jb2[loction].setIcon(imc);//æ›´æ”¹å›¾æ ‡ç¼©æ”¾
+						System.out.println(loction+"é€‰ä¸­æˆåŠŸ");						
 					}		
 				}
 			};		
 			jb2[i].addActionListener(ac[i]);
 		}
 	}
-	/**½«Íæ¼ÒµÄÅÆÏÔÊ¾ÔÚÆÁÄ»ÉÏ
+	/**å°†ç©å®¶çš„ç‰Œæ˜¾ç¤ºåœ¨å±å¹•ä¸Š
 	 * */
 	public void showCards() {
-		System.out.println("½øÈëshowcards³ÌĞò");
-		initializeButtons();//ÖØÖÃ°´Å¥
+		System.out.println("è¿›å…¥showcardsç¨‹åº");
+		initializeButtons();//é‡ç½®æŒ‰é’®
 		for(int i = 0;i < p3.cards.size();i++) {
 			jb1[i].setIcon(null);
 		}
 		for(int i = p3.cards.size();i < 20;i++) {
-			//Çå³ı·¢³öÈ¥µÄÅÆ
+			//æ¸…é™¤å‘å‡ºå»çš„ç‰Œ
 			jb1[i].setIcon(null);
 			jb2[i].setIcon(null);
 		}
 		for(int i = 0;i < currentCards.size();i++) {
-			//ÏÔÊ¾¶Ô·½³öµÄÅÆ
+			//æ˜¾ç¤ºå¯¹æ–¹å‡ºçš„ç‰Œ
 			URL url = getClass().
 					getResource("/res/"+currentCards.get(i)+".jpg");
-			//»ñÈ¡Í¼Æ¬Â·¾¶
-			ImageIcon ic = new ImageIcon(url);//´´½¨icon¶ÔÏó
+			//è·å–å›¾ç‰‡è·¯å¾„
+			ImageIcon ic = new ImageIcon(url);//åˆ›å»ºiconå¯¹è±¡
 			ic.setImage(ic.getImage().
 					getScaledInstance(70, 100,Image.SCALE_DEFAULT));
-			jb1[i].setIcon(ic);//¸ø°´Å¥ÉèÖÃÍ¼Ïñ			
+			jb1[i].setIcon(ic);//ç»™æŒ‰é’®è®¾ç½®å›¾åƒ			
 		}		
 	}
-	/**½ĞµØÖ÷
+	/**å«åœ°ä¸»
 	 * */
 	public static void jiaoDizhu() {
-		//npc1µÄ·ÖÊı
+		//npc1çš„åˆ†æ•°
 		p1.score = (int)(Math.random()*3)+1;
-		System.out.println("npc1·ÖÊıÎª"+p1.score);
-		//npc2µÄ·ÖÊı
+		System.out.println("npc1åˆ†æ•°ä¸º"+p1.score);
+		//npc2çš„åˆ†æ•°
 		p2.score = (int)(Math.random()*3)+1;
-		System.out.println("npc2·ÖÊıÎª"+p2.score);		
-		jd = new JDialog(jf,"½ĞµØÖ÷£¬Èô²»½ĞÇëÖ±½Ó¹Ø±Õ¶Ô»°¿ò",true);//´´½¨¶Ô»°¿ò
+		System.out.println("npc2åˆ†æ•°ä¸º"+p2.score);		
+		jd = new JDialog(jf,"å«åœ°ä¸»ï¼Œè‹¥ä¸å«è¯·ç›´æ¥å…³é—­å¯¹è¯æ¡†",true);//åˆ›å»ºå¯¹è¯æ¡†
 		jd.setResizable(false);
 		jd.setLocationRelativeTo(jf);
 		jd.setSize(500, 200);
-		Container cc = jd.getContentPane();//»ñÈ¡ÈİÆ÷
-		cc.setLayout(new GridLayout(1,3));//ÉèÖÃ²¼¾Ö
-		//´´½¨3¸ö°´Å¥
-		JButton jb1 = new JButton("1·Ö");
-		JButton jb2 = new JButton("2·Ö");
-		JButton jb3 = new JButton("3·Ö");
-		//°´Å¥¼ÓÈëÈİÆ÷
+		Container cc = jd.getContentPane();//è·å–å®¹å™¨
+		cc.setLayout(new GridLayout(1,3));//è®¾ç½®å¸ƒå±€
+		//åˆ›å»º3ä¸ªæŒ‰é’®
+		JButton jb1 = new JButton("1åˆ†");
+		JButton jb2 = new JButton("2åˆ†");
+		JButton jb3 = new JButton("3åˆ†");
+		//æŒ‰é’®åŠ å…¥å®¹å™¨
 		cc.add(jb1);
 		cc.add(jb2);
 		cc.add(jb3);
-		//Ìí¼Ó¼üÅÌÊÂ¼ş
+		//æ·»åŠ é”®ç›˜äº‹ä»¶
 		jb1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -371,7 +372,7 @@ public class Main {
 				jd.setVisible(false);
 			}
 		});
-		//Ìí¼Ó¼üÅÌÊÂ¼ş
+		//æ·»åŠ é”®ç›˜äº‹ä»¶
 		jb2.addActionListener(new ActionListener() {
 			
 			@Override
@@ -380,7 +381,7 @@ public class Main {
 				jd.setVisible(false);
 			}
 		});
-		//Ìí¼Ó¼üÅÌÊÂ¼ş
+		//æ·»åŠ é”®ç›˜äº‹ä»¶
 		jb3.addActionListener(new ActionListener() {
 			
 			@Override
@@ -389,38 +390,38 @@ public class Main {
 				jd.setVisible(false);
 			}
 		});
-		jd.setVisible(true);//Ê¹´°Ìå¿É¼û
-		System.out.println("¶Ô»°¿ò´´½¨Õı³£");
+		jd.setVisible(true);//ä½¿çª—ä½“å¯è§
+		System.out.println("å¯¹è¯æ¡†åˆ›å»ºæ­£å¸¸");
 		int largest = 0;
-		//±È³ö½Ğ·Ö×î´óµÄÈ·¶¨µØÖ÷
+		//æ¯”å‡ºå«åˆ†æœ€å¤§çš„ç¡®å®šåœ°ä¸»
 		largest = p1.score > p2.score?p1.score:p2.score;
 		if(p3.score > largest || p3.score == 3) {
 			p3.isLandlord = true;
-			createDialog("µØÖ÷Çé¿ö", "ÄãÊÇµØÖ÷", false);
+			createDialog("åœ°ä¸»æƒ…å†µ", "ä½ æ˜¯åœ°ä¸»", false);
 		}else {
 			if(p1.score > p2.score) {
 				p1.isLandlord = true;
-				createDialog("µØÖ÷Çé¿ö", "ÄãÊÇÅ©Ãñ", false);
+				createDialog("åœ°ä¸»æƒ…å†µ", "ä½ æ˜¯å†œæ°‘", false);
 			}else {
 				p2.isLandlord = true;
-				createDialog("µØÖ÷Çé¿ö", "ÄãÊÇÅ©Ãñ", false);
+				createDialog("åœ°ä¸»æƒ…å†µ", "ä½ æ˜¯å†œæ°‘", false);
 			}
 		}
 	}
-	/**¸ù¾İ±êÌâºÍÄÚÈİ´´½¨¶Ô»°¿ò
+	/**æ ¹æ®æ ‡é¢˜å’Œå†…å®¹åˆ›å»ºå¯¹è¯æ¡†
 	 * */
 	public static void createDialog(String title,String text,boolean isExit) {
 		jd = null;
-		jd = new JDialog(jf,title,true);//ÖØÖÃ¶Ô»°¿ò
+		jd = new JDialog(jf,title,true);//é‡ç½®å¯¹è¯æ¡†
 		jd.setResizable(false);
 		jd.setLocationRelativeTo(jf);
 		jd.setSize(200, 200);
 		Container c = jd.getContentPane();
 		c.setLayout(new GridLayout(2,1));
 		JLabel jl = new JLabel(text);
-		jl.setFont(new Font("ËÎÌå", 0, 20));
+		jl.setFont(new Font("å®‹ä½“", 0, 20));
 		c.add(jl);
-		JButton jb1 = new JButton("È·¶¨");
+		JButton jb1 = new JButton("ç¡®å®š");
 		jb1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -432,7 +433,7 @@ public class Main {
 			}
 		});
 		c.add(jb1);
-		jd.setVisible(true);//Ê¹¶Ô»°¿ò¿É¼û
-		System.out.println("¶Ô»°¿ò´´½¨Õı³£");
+		jd.setVisible(true);//ä½¿å¯¹è¯æ¡†å¯è§
+		System.out.println("å¯¹è¯æ¡†åˆ›å»ºæ­£å¸¸");
 	}
 }
